@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: reading
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  redis:
+    image: redis:7
